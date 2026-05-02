@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Payment — PayTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <div class="shell">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sh-icon">💳</div>
+        <span>PayTrack <small>Payment Records</small></span>
+      </div>
+      <p class="nav-section">Main Menu</p>
+      <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="add.html"       class="nav-link"><span class="nav-icon">➕</span> Add Payment</a>
+      <a href="update.html"    class="nav-link"><span class="nav-icon">✏️</span> Update Status</a>
+      <a href="report.html"    class="nav-link"><span class="nav-icon">📋</span> Payment Report</a>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-info"><strong id="currentUser">Admin</strong><small>Administrator</small></div>
+          <button id="logoutBtn" title="Logout">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main ── -->
+    <main class="main">
+
+      <div class="page-header fade-in">
+        <div class="page-header-left">
+          <div class="page-pill">New Record</div>
+          <h1>Add Payment</h1>
+          <p>Create a new payment entry. Status starts as <strong style="color:#c27b0a;">Pending</strong>.</p>
+        </div>
+        <a href="report.html" class="btn btn-outline fade-in-d1">📋 View All</a>
+      </div>
+
+      <!-- Form Card -->
+      <div class="content-card fade-in">
+
+        <!-- Card heading with color bar -->
+        <div style="
+          background:linear-gradient(135deg,rgba(108,99,255,.08),rgba(72,198,239,.08));
+          border:1.5px solid rgba(108,99,255,.18); border-radius:14px;
+          padding:16px 18px; display:flex; align-items:center; gap:14px; margin-bottom:28px;
+        ">
+          <div style="width:44px;height:44px;background:var(--grad-main);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">➕</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;">New Payment Record</div>
+            <div style="font-size:12px;color:var(--muted);">Fill in the details below and save.</div>
+          </div>
+        </div>
+
+        <form id="addPaymentForm" novalidate>
+
+          <!-- Customer Name -->
+          <div class="form-group">
+            <label for="customerName">👤 Customer Name</label>
+            <input type="text" id="customerName" placeholder="e.g. Priya Sharma" maxlength="80" required />
+            <p class="form-hint">Full name of the customer or payer.</p>
+          </div>
+
+          <!-- Amount -->
+          <div class="form-group">
+            <label for="amount">💰 Amount (₹)</label>
+            <input type="number" id="amount" placeholder="e.g. 5000" min="1" step="0.01" required />
+            <p class="form-hint">Enter the payment amount in Indian Rupees.</p>
+          </div>
+
+          <!-- Status display (read-only) -->
+          <div class="form-group">
+            <label>📌 Initial Status</label>
+            <div style="padding:13px 16px; background:#f5f6ff; border:2px solid var(--border2); border-radius:var(--radius-sm); display:flex; align-items:center; gap:12px;">
+              <span class="badge badge-pending"><span class="badge-dot"></span>Pending</span>
+              <span style="font-size:13px;color:var(--muted);">All new records start as Pending.</span>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;">
+            <button type="submit"   class="btn btn-primary">➕ Save Record</button>
+            <button type="reset"    class="btn btn-outline">↺ Clear</button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Confirmation strip (shown after save) -->
+      <div class="confirm-card fade-in" id="addConfirm">
+
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div style="width:48px;height:48px;background:var(--grad-green);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">✅</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;margin-bottom:2px;">Record Saved!</div>
+            <div style="font-size:13px;color:var(--muted);">Payment successfully added to LocalStorage.</div>
+          </div>
+        </div>
+
+        <div class="confirm-row">
+          <span class="cr-label">Record ID</span>
+          <span class="cr-val" id="confirmId" style="font-family:monospace;font-size:13px;">—</span>
+        </div>
+        <div class="confirm-row">
+          <span class="cr-label">Customer</span>
+          <span class="cr-val" id="confirmName">—</span>
+        </div>
+        <div class="confirm-row">
+          <span class="cr-label">Amount</span>
+          <span class="cr-val" id="confirmAmount" style="color:var(--green2);font-family:'Outfit',sans-serif;font-size:16px;">—</span>
+        </div>
+        <div class="confirm-row">
+          <span class="cr-label">Created At</span>
+          <span class="cr-val" id="confirmDate" style="font-size:13px;color:var(--muted);">—</span>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+          <a href="add.html"    class="btn btn-primary btn-sm">➕ Add Another</a>
+          <a href="report.html" class="btn btn-ghost btn-sm">📋 View Report</a>
+          <a href="update.html" class="btn btn-outline btn-sm">✏️ Update Status</a>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>

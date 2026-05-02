@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — PayTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Mobile menu toggle -->
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <div class="shell">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sh-icon">💳</div>
+        <span>PayTrack <small>Payment Records</small></span>
+      </div>
+
+      <p class="nav-section">Main Menu</p>
+      <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="add.html"       class="nav-link"><span class="nav-icon">➕</span> Add Payment</a>
+      <a href="update.html"    class="nav-link"><span class="nav-icon">✏️</span> Update Status</a>
+      <a href="report.html"    class="nav-link"><span class="nav-icon">📋</span> Payment Report</a>
+
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-info">
+            <strong id="currentUser">Admin</strong>
+            <small>Administrator</small>
+          </div>
+          <button id="logoutBtn" title="Logout">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main ── -->
+    <main class="main">
+
+      <!-- Header -->
+      <div class="page-header fade-in">
+        <div class="page-header-left">
+          <div class="page-pill">Overview</div>
+          <h1>Dashboard</h1>
+          <p>Welcome back! Here's your payment summary.</p>
+        </div>
+        <a href="add.html" class="btn btn-primary fade-in-d1">➕ New Payment</a>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+
+        <div class="stat-card fade-in" style="--sc-grad:var(--grad-main); --sc-bg:rgba(108,99,255,.1);">
+          <div class="stat-icon-wrap">💳</div>
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">Total Payments</div>
+        </div>
+
+        <div class="stat-card fade-in-d1" style="--sc-grad:var(--grad-green); --sc-bg:rgba(17,153,142,.1);">
+          <div class="stat-icon-wrap">✅</div>
+          <div class="stat-value" id="statPaid">0</div>
+          <div class="stat-label">Paid</div>
+        </div>
+
+        <div class="stat-card fade-in-d2" style="--sc-grad:var(--grad-orange); --sc-bg:rgba(247,151,30,.1);">
+          <div class="stat-icon-wrap">⏳</div>
+          <div class="stat-value" id="statPending">0</div>
+          <div class="stat-label">Pending</div>
+        </div>
+
+        <div class="stat-card fade-in-d3" style="--sc-grad:var(--grad-teal); --sc-bg:rgba(67,206,162,.1);">
+          <div class="stat-icon-wrap">💰</div>
+          <div class="stat-value" id="statTotalAmount" style="font-size:20px; margin-top:4px;">₹0</div>
+          <div class="stat-label">Total Amount</div>
+        </div>
+
+      </div>
+
+      <!-- Quick Actions -->
+      <p class="section-label">Quick Actions</p>
+      <div class="actions-grid">
+
+        <a href="add.html" class="action-card fade-in" style="--ac-grad:var(--grad-main); --ac-bg:rgba(108,99,255,.1);">
+          <div class="ac-icon">➕</div>
+          <div class="ac-info">
+            <strong>Add Payment</strong>
+            <small>Create a new payment record</small>
+          </div>
+          <div class="ac-arrow">›</div>
+        </a>
+
+        <a href="update.html" class="action-card fade-in-d1" style="--ac-grad:var(--grad-orange); --ac-bg:rgba(247,151,30,.1);">
+          <div class="ac-icon">✏️</div>
+          <div class="ac-info">
+            <strong>Update Status</strong>
+            <small>Mark pending as paid</small>
+          </div>
+          <div class="ac-arrow">›</div>
+        </a>
+
+        <a href="report.html" class="action-card fade-in-d2" style="--ac-grad:var(--grad-green); --ac-bg:rgba(17,153,142,.1);">
+          <div class="ac-icon">📋</div>
+          <div class="ac-info">
+            <strong>Payment Report</strong>
+            <small>Browse & export all records</small>
+          </div>
+          <div class="ac-arrow">›</div>
+        </a>
+
+      </div>
+
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>

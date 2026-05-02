@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Update Status — PayTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <div class="shell">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sh-icon">💳</div>
+        <span>PayTrack <small>Payment Records</small></span>
+      </div>
+      <p class="nav-section">Main Menu</p>
+      <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="add.html"       class="nav-link"><span class="nav-icon">➕</span> Add Payment</a>
+      <a href="update.html"    class="nav-link"><span class="nav-icon">✏️</span> Update Status</a>
+      <a href="report.html"    class="nav-link"><span class="nav-icon">📋</span> Payment Report</a>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-info"><strong id="currentUser">Admin</strong><small>Administrator</small></div>
+          <button id="logoutBtn" title="Logout">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main ── -->
+    <main class="main">
+
+      <div class="page-header fade-in">
+        <div class="page-header-left">
+          <div class="page-pill">Update</div>
+          <h1>Update Status</h1>
+          <p>Select a <strong style="color:#c27b0a;">Pending</strong> payment and mark it as <strong style="color:var(--green2);">Paid</strong>.</p>
+        </div>
+        <a href="add.html" class="btn btn-primary fade-in-d1">➕ Add Payment</a>
+      </div>
+
+      <div class="content-card fade-in" style="max-width:640px;">
+
+        <!-- Card header -->
+        <div style="
+          background:linear-gradient(135deg,rgba(247,151,30,.08),rgba(255,210,0,.08));
+          border:1.5px solid rgba(247,151,30,.2); border-radius:14px;
+          padding:16px 18px; display:flex; align-items:center; gap:14px; margin-bottom:24px;
+        ">
+          <div style="width:44px;height:44px;background:var(--grad-orange);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✏️</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;">Select a Payment</div>
+            <div style="font-size:12px;color:var(--muted);">Grayed items are already Paid. Click a pending one.</div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="form-group">
+          <label for="updateSearch">🔍 Search by name or ID</label>
+          <input type="text" id="updateSearch" placeholder="e.g. Priya or PMT-…" />
+        </div>
+
+        <!-- Payment list (rendered by JS) -->
+        <div class="payment-list" id="paymentList">
+          <div class="empty-state">
+            <div class="es-icon">⏳</div>
+            <h3>Loading…</h3>
+          </div>
+        </div>
+
+        <!-- Action row -->
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:4px;">
+          <button id="updateBtn" class="btn btn-success" disabled>✅ Mark as Paid</button>
+          <span id="selectionHint" style="font-size:13px;color:var(--muted);">No payment selected</span>
+        </div>
+
+      </div>
+
+      <!-- Info tip -->
+      <div style="
+        margin-top:20px; max-width:640px;
+        padding:14px 18px; border-radius:14px;
+        background:rgba(72,198,239,.07); border:1.5px solid rgba(72,198,239,.22);
+        font-size:13px; color:var(--text2);
+      " class="fade-in-d2">
+        💡 <strong>Note:</strong> Once a payment is marked as Paid it cannot be reversed here.
+        Visit the <a href="report.html">Payment Report</a> to delete records if needed.
+      </div>
+
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="script.js"></script>
+  <script>
+    /* Update selection hint text */
+    document.addEventListener('DOMContentLoaded', () => {
+      const hint = document.getElementById('selectionHint');
+      const list = document.getElementById('paymentList');
+      if (!list || !hint) return;
+      list.addEventListener('click', e => {
+        const item = e.target.closest('.payment-item:not(.is-paid)');
+        if (!item) return;
+        const name = item.querySelector('.pi-info strong');
+        if (name) hint.textContent = '✅ Selected: ' + name.textContent;
+      });
+    });
+  </script>
+</body>
+</html>

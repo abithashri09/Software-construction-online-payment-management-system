@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Report — PayTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <div class="shell">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sh-icon">💳</div>
+        <span>PayTrack <small>Payment Records</small></span>
+      </div>
+      <p class="nav-section">Main Menu</p>
+      <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="add.html"       class="nav-link"><span class="nav-icon">➕</span> Add Payment</a>
+      <a href="update.html"    class="nav-link"><span class="nav-icon">✏️</span> Update Status</a>
+      <a href="report.html"    class="nav-link"><span class="nav-icon">📋</span> Payment Report</a>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-info"><strong id="currentUser">Admin</strong><small>Administrator</small></div>
+          <button id="logoutBtn" title="Logout">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main ── -->
+    <main class="main">
+
+      <div class="page-header fade-in">
+        <div class="page-header-left">
+          <div class="page-pill">Reports</div>
+          <h1>Payment Report</h1>
+          <p>All payment records stored in your browser.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;" class="fade-in-d1">
+          <button id="exportCsv" class="btn btn-outline">📥 Export CSV</button>
+          <a href="add.html" class="btn btn-primary">➕ Add Payment</a>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar fade-in-d1">
+        <button class="filter-btn active" data-filter="all">All Records</button>
+        <button class="filter-btn" data-filter="pending">⏳ Pending</button>
+        <button class="filter-btn" data-filter="paid">✅ Paid</button>
+        <span id="reportCount" style="margin-left:auto;font-size:13px;color:var(--muted);font-weight:600;">0 records</span>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper fade-in-d2">
+
+        <div class="table-toolbar">
+          <h3>📋 All Payments</h3>
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="reportSearch" placeholder="Search name or ID…" />
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>#&nbsp;Record ID</th>
+                <th>Customer Name</th>
+                <th>Amount (₹)</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody">
+              <tr><td colspan="6">
+                <div class="empty-state">
+                  <div class="es-icon">⏳</div><h3>Loading…</h3>
+                </div>
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Legend -->
+      <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;" class="fade-in-d3">
+        <span style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);">
+          <span class="badge badge-pending"><span class="badge-dot"></span>Pending</span> — payment not yet received
+        </span>
+        <span style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);">
+          <span class="badge badge-paid"><span class="badge-dot"></span>Paid</span> — payment confirmed
+        </span>
+      </div>
+
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>
